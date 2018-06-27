@@ -6,6 +6,11 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Notification;
+use App\Notifications\WelcomeNotification;
+use Mail;
+use DOMDocument;
+use Illuminate\Support\Facades\Redirect;
 
 class RegisterController extends Controller
 {
@@ -50,7 +55,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:3|confirmed',
         ]);
     }
 
@@ -62,10 +67,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $newuser = new User();
+        
+        $newuser->name = $data['name'];
+        $newuser->email = $data['email'];
+        $newuser->password = bcrypt($data['password']);
+        // dd($newuser->password);
+        
+        $newuser->save();
+        $newuser->notify(new WelcomeNotification());
+        // dd($newuser->notify(new WelcomeNotification()));
+        // return(User::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => bcrypt($data['password']),
+        // ]));
+        return ($newuser);    
     }
+
+    
 }
