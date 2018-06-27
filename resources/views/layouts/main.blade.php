@@ -14,7 +14,8 @@
 <body>
 
     <div id='app'>
-    <navbar-component></navbar-component>
+    <!-- <navbar-component></navbar-component> -->
+    <router-view></router-view>
         @yield('content')
     </div>
 

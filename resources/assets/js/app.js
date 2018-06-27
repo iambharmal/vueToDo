@@ -18,18 +18,18 @@ window.axios = axios;
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('articles-component', require('./components/ArticlesComponent.vue'));
+// Vue.component('example-component', require('./components/ExampleComponent.vue'));
+// Vue.component('articles-component', require('./components/ArticlesComponent.vue'));
 
-Vue.component('navbar-component', require('./components/NavbarComponent.vue')); 
+// Vue.component('navbar-component', require('./components/NavbarComponent.vue')); 
 // if navbar component is used first in the page then it should be declared before other components, else there will be uncaught resource error found
-Vue.component('task-component', require('./components/TaskComponent.vue'));
+// Vue.component('task-component', require('./components/TaskComponent.vue'));
 
 import TaskComponent from './components/TaskComponent.vue';
-import NavbarComponent from './components/TaskComponent.vue';
-import ArticlesComponent from './components/TaskComponent.vue';
-import CurrentTaskComponent from './components/TaskComponent.vue';
-import ArchivedTaskComponent from './components/TaskComponent.vue';
+// import NavbarComponent from './components/TaskComponent.vue';
+// import ArticlesComponent from './components/TaskComponent.vue';
+import CurrentTaskComponent from './components/CurrentTaskComponent.vue';
+import ArchivedTaskComponent from './components/ArchivedTaskComponent.vue';
 
 import VueRouter from 'vue-router';
 window.Vue.use(VueRouter);
@@ -39,11 +39,11 @@ window.Vue.use(VueRouter);
 
 //defining routes
 const routes = [
-    // {
-    //     path: '/',
-    //     components: TaskComponent,
-    //     name: 'TaskComponent'
-    // },
+    {
+        path: '/',
+        components: TaskComponent,
+        name: 'TaskComponent'
+    },
     {path: '/current-tasks', component: CurrentTaskComponent, name: 'CurrentTaskComponent'},
     {path: '/archived-tasks', component: ArchivedTaskComponent, name: 'ArchivedTaskComponent'},
 ]
